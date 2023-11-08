@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo-uns-biru.png" rel="icon">
+  <link href="assets/img/logo-uns-biru.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendoor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendoor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendoor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendoor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendoor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendoor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendoor/simple-datatables/dashboar.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.php" class="logo d-flex align-items-center">
+        <img src="assets/img/logo-uns-biru.png" alt="">
+        <span class="d-none d-lg-block">E-CATALOG</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="hasil_pencarian.php">
+        <input type="text" id="judul" name="judul" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard.php">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="upload.php">
+          <i class="bi bi-journal-text"></i><span>Upload</span>
+        </a>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="profile.php">
+          <i class="bi bi-person"></i>
+          <span>Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Upload</h1>
+       <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+          <li class="breadcrumb-item active">Upload</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+    <div class="class">
+        <div class="class-body">
+            <form action="upload_process.php" method="POST" enctype="multipart/form-data">
+                <div class="input-container">
+                    <label for="judul">Judul TA:</label>
+                    <input type="text" id="judul" name="judul" required>
+                </div>
+                <div class="input-container">
+                    <label for="abstrak">Abstrak:</label>
+                    <textarea id="abstrak" name="abstrak" rows="4" required></textarea>
+                </div>
+                <div class="input-container">
+                    <label for="pengesahan">Lembar Pengesahan (PDF):</label>
+                    <input type="file" id="pengesahan" name="pengesahan" accept=".pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="bebas_lab">Lembar Bebas Lab (File):</label>
+                    <input type="file" id="bebas_lab" name="bebas_lab" accept=".doc,.docx,.pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="kesediaan_publikasi">Lembar Kesediaan Publikasi (File):</label>
+                    <input type="file" id="kesediaan_publikasi" name="kesediaan_publikasi" accept=".doc,.docx,.pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="poster_ta">Poster TA (Gambar):</label>
+                    <input type="file" id="poster_ta" name="poster_ta" accept="image/*" required>
+                </div>
+                <div class="input-container">
+                    <label for="github_link">Link GitHub:</label>
+                    <input type="text" id="github_link" name="github_link" required>
+                </div>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+    
+
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendoor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendoor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendoor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendoor/echarts/echarts.min.js"></script>
+  <script src="assets/vendoor/quill/quill.min.js"></script>
+  <script src="assets/vendoor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendoor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendoor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/dashboard.js"></script>
+
+</body>
+
+</html>
