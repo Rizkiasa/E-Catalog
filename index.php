@@ -60,10 +60,10 @@
       <div class="row justify-content-between">
         <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
           <div data-aos="zoom-out">
-            <h1>UNIVERSITAS SEBELAS MARET<span>PSDKU MADIUN</span></h1>
+            <h1>UNIVERSITAS SEBELAS MARET<span class= "ms-3">PSDKU MADIUN</span></h1>
             <div class="text-center text-lg-start">
               <a href="login.php" 
-              class="btn-get-started scrollto">LOGIN</a>
+              class="btn-get-started scrollto">LOGIN DOSEN</a>
             </div>
            <br> <div class="text-center text-lg-start">
               <a href="https://sso.uns.ac.id/login" 

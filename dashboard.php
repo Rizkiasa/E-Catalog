@@ -102,16 +102,16 @@
             // Misalnya, menggunakan SQL query untuk mengambil judul, penulis, dan poster
 
             // Contoh query (Anda perlu menggantinya dengan query sesuai dengan database Anda):
-            // $sql = "SELECT judul, penulis, poster FROM tugas_akhir";
-            // $result = mysqli_query($link, $sql);
+            $sql = "SELECT judul, penulis, poster FROM tugas_akhir";
+            $result = mysqli_query($link, $sql);
 
-            // while ($row = mysqli_fetch_assoc($result)) {
-            //     echo "<div class='ta-item'>";
-            //     echo "<img src='uploads/" . $row["poster"] . "' alt='Poster TA'>";
-            //     echo "<h2>" . $row["judul"] . "</h2>";
-            //     echo "<p>" . $row["penulis"] . "</p>";
-            //     echo "</div>";
-            // }
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='ta-item'>";
+                echo "<img src='uploads/" . $row["poster"] . "' alt='Poster TA'>";
+                echo "<h2>" . $row["judul"] . "</h2>";
+                echo "<p>" . $row["penulis"] . "</p>";
+                echo "</div>";
+            }
             ?>
         </div>
         

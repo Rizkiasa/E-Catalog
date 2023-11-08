@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+session_start();
+include 'config.php';
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -43,34 +47,28 @@
                     $email = $_POST["email"];
                     $pass = mysqli_real_escape_string($koneksi, md5($_POST['password']));
 
-                    $sql_aktif = mysqli_query($koneksi, "SELECT * FROM users WHERE email='$email'");
-                    $sql_nonaktif = mysqli_query($koneksi, "SELECT * FROM user_registrasis WHERE email='$email'");
+                    $sql_aktif = mysqli_query($koneksi, "SELECT * FROM dosen WHERE email='$email'");
                     $cek_akun_aktif = mysqli_num_rows($sql_aktif);
-                    $cek_akun_nonaktif = mysqli_num_rows($sql_nonaktif);
                     $data_akun = mysqli_fetch_assoc($sql_aktif);
                     $password = $data_akun['password'];
 
-                    if ($cek_akun_nonaktif > 0 or $cek_akun_aktif > 0) {
+                    
                         if ($cek_akun_aktif > 0) {
                             if ($pass == $password) {
-                                $_SESSION['email'] = $email;
-                                $_SESSION['nama'] = $data_akun['nama_user'];
-                                $_SESSION['foto_profil'] = $data_akun['gambar'];
+                                $_SESSION['id'] = $data_akun['id'];
+                                $_SESSION['nama'] = $data_akun['nama'];
+                                $_SESSION['role'] = $data_akun['role'];
 
-                                echo '<script>window.location.href = "index.php";</script>';
+                                echo '<script>window.location.href = "admin_prodi/dashboard_admin_prodi.php";</script>';
                             } else {
                                 echo "<script>
                     alert('password Anda salah');
                 </script>";
                             }
                         } else {
-                            echo '<script>alert("Akun Anda belum diaktifkan")</script>';
-                            echo '<script>window.location.href = "login.php";</script>';
+                            echo '<script>alert("Akun Anda belum terdaftar")</script>';
+                            echo '<script>window.location.href = "register.php";</script>';
                         }
-                    } else {
-                        echo '<script>alert("Akun Anda tidak terdaftar, lakukan registrasi dahulu")</script>';
-                        echo '<script>window.location.href = "register.php";</script>';
-                    }
                 }
                 ?>
             </div>

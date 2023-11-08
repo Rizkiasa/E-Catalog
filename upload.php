@@ -114,7 +114,7 @@
 
     <div class="class">
         <div class="class-body">
-            <form action="upload_process.php" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="input-container">
                     <label for="judul">Judul TA:</label>
                     <input type="text" id="judul" name="judul" required>
@@ -143,8 +143,50 @@
                     <label for="github_link">Link GitHub:</label>
                     <input type="text" id="github_link" name="github_link" required>
                 </div>
-                <button type="submit">Upload</button>
+                <input type="submit" name="upload" value="Upload">
             </form>
+            <?php
+
+            include('config.php');
+
+            if (isset($_POST['upload'])) {
+                $judul = $_POST['judul'];
+                $abstrak = $_POST['abstrak'];
+                $penulis = "Nama penulis";
+                $link_github = $_POST['github_link'];
+                $pengesahan_name = $_FILES['pengesahan']['name'];
+                $bebas_lab_name = $_FILES['bebas_lab']['name'];
+                $kesediaan_publikasi_name = $_FILES['kesediaan_publikasi']['name'];
+                $pengesahan_tmp = $_FILES['pengesahan']['tmp_name'];
+                $bebas_lab_tmp = $_FILES['bebas_lab']['tmp_name'];
+                $kesediaan_publikasi_tmp = $_FILES['kesediaan_publikasi']['tmp_name'];
+                $pengesahan_path = "assets/file/pengesahan/" . $pengesahan_name;
+                $ketersediaan_publikasi_path = "assets/file/ketersediaan_publikasi/" . $kesediaan_publikasi_name;
+                $bebas_lab_path = "assets/file/bebas_lab/" . $bebas_lab_name;
+                $poster = $_FILES['poster_ta']['name'];
+                $poster_tmp = $_FILES['poster_ta']['tmp_name'];
+                $poster_path = "assets/img/poster/" . $poster;
+                //query
+                $query =  "INSERT INTO tugas_akhir VALUES(NULL, '$judul' , '$abstrak' , '$penulis' , '$link_github' , '$pengesahan_name', '$bebas_lab_name', '$kesediaan_publikasi_name', '$pengesahan_path', '$ketersediaan_publikasi_path', '$bebas_lab_path', '$poster')";
+                $result = mysqli_query($koneksi, $query);
+
+                    if (!$result) {
+                        die("Query gagal dijalankan: " . mysqli_error($koneksi) .
+                            " - " . mysqli_error($koneksi));
+                    } else {
+                      move_uploaded_file($pengesahan_tmp, $pengesahan_path);
+                      move_uploaded_file($bebas_lab_tmp, $bebas_lab_path);
+                      move_uploaded_file($kesediaan_publikasi_tmp, $ketersediaan_publikasi_path);
+                      move_uploaded_file($poster_tmp, $poster_path);
+                        echo '<script>alert("Data berhasil ditambahkan")</script>';
+                        echo '<script>window.location.href ="upload.php";</script>';
+                        exit();
+                    }
+                
+            }
+
+            mysqli_close($koneksi);
+            ?>
         </div>
     </div>
     

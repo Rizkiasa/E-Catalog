@@ -5,19 +5,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $judul = $_POST["judul"];
  
 
-    // Di sini Anda dapat mengambil data dari database berdasarkan kriteria yang dimasukkan
-    // Misalnya, menggunakan SQL query untuk mencari TA dengan judul dan penulis yang sesuai
+    $sql = "SELECT * FROM tugas_akhir WHERE judul LIKE '%$judul%' AND penulis LIKE '%$penulis%'";
+    $result = mysqli_query($link, $sql);
 
-    // Contoh query (Anda perlu menggantinya dengan query sesuai dengan database Anda):
-    // $sql = "SELECT * FROM tugas_akhir WHERE judul LIKE '%$judul%' AND penulis LIKE '%$penulis%'";
-    // $result = mysqli_query($link, $sql);
-
-    // Jika query berhasil dilakukan, Anda dapat menampilkan hasilnya
-    // while ($row = mysqli_fetch_assoc($result)) {
-    //     // Tampilkan data TA, misalnya judul, dan lainnya
-    //     echo "<p>Judul: " . $row["judul"] . "</p>";
-    //     // ... tampilkan informasi lainnya sesuai kebutuhan
-    // }
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Tampilkan data TA, misalnya judul, dan lainnya
+        echo "<p>Judul: " . $row["judul"] . "</p>";
+        // ... tampilkan informasi lainnya sesuai kebutuhan
+    }
 }
 ?>
 
