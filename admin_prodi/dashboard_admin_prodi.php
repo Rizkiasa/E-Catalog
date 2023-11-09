@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../config.php';
 
 // Cek apakah pengguna sudah login sebagai admin Prodi
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["role"])) {
@@ -44,6 +45,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
 
 <body>
 
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -72,7 +74,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.php">
+        <a class="nav-link" href="dashboard_admin_prodi.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -116,28 +118,29 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Gambar Poster</th>
-                    <th scope="col">Nama File</th>
+                    <th scope="col">Berkas Bebas Lab</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
+              <?php
+              $no = 1;
+              $query = mysqli_query($koneksi, "SELECT id, penulis, poster_image, bebas_lab_file FROM tugas_akhir
+              ORDER BY id DESC
+              ");
+                      while ($data = mysqli_fetch_assoc($query)) {
+              ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td><img src="gambar1.jpg" alt="Gambar Poster 1" class="img-thumbnail" style="max-width: 100px;"></td>
-                    <td>File1.pdf</td>
+                    <th scope="row"><?php echo $no++ ?></th>
+                    <td><img src="../assets/img/poster/<?php echo $data['poster_image'] ?>" alt="Gambar Poster 1" class="img-thumbnail" style="max-width: 100px;"></td>
+                    <td><?php echo $data['bebas_lab_file'] ?> <a href="openfile.php?filename=<?php echo $data['bebas_lab_file'] ?>">download</a></td>
                     <td>
-                        <button class="btn btn-primary" onclick="acceptRequest(1)">Acc</button>
+                    <a class="btn btn-success" onclick="return confirm('Apakah Anda yakin mengkonfirmasi data ini?')" href=""> <span> ACC </span><i class='bx bx-check'></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td><img src="gambar2.jpg" alt="Gambar Poster 2" class="img-thumbnail" style="max-width: 100px;"></td>
-                    <td>File2.pdf</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="acceptRequest(2)">Acc</button>
-                    </td>
-                </tr>
-                <!-- Tambahkan baris berikut sesuai dengan data Anda -->
+                <?php
+                      }
+                ?>
             </tbody>
         </table>
         <?php } ?>
@@ -160,7 +163,6 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
 
   <!-- Template Main JS File -->
   <script src="../assets/js/dashboard.js"></script>
-
 </body>
 
 </html>

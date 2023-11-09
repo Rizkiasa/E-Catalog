@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,8 +106,9 @@
             // Misalnya, menggunakan SQL query untuk mengambil judul, penulis, dan poster
 
             // Contoh query (Anda perlu menggantinya dengan query sesuai dengan database Anda):
-            $sql = "SELECT judul, penulis, poster FROM tugas_akhir";
-            $result = mysqli_query($link, $sql);
+            $sql = "SELECT id, penulis, poster_image, judul FROM tugas_akhir";
+            $result = mysqli_query($koneksi, $query);
+
 
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='ta-item'>";

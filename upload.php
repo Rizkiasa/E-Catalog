@@ -167,7 +167,7 @@
                 $poster_tmp = $_FILES['poster_ta']['tmp_name'];
                 $poster_path = "assets/img/poster/" . $poster;
                 //query
-                $query =  "INSERT INTO tugas_akhir VALUES(NULL, '$judul' , '$abstrak' , '$penulis' , '$link_github' , '$pengesahan_name', '$bebas_lab_name', '$kesediaan_publikasi_name', '$pengesahan_path', '$ketersediaan_publikasi_path', '$bebas_lab_path', '$poster')";
+                $query =  "INSERT INTO tugas_akhir VALUES(NULL, '$judul' , '$penulis' , '$abstrak' , '$link_github' , '$pengesahan_name', '$bebas_lab_name', '$kesediaan_publikasi_name', '$pengesahan_path', '$ketersediaan_publikasi_path', '$bebas_lab_path', '$poster')";
                 $result = mysqli_query($koneksi, $query);
 
                     if (!$result) {
