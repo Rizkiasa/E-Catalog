@@ -162,7 +162,7 @@
                 $kesediaan_publikasi_tmp = $_FILES['kesediaan_publikasi']['tmp_name'];
                 $pengesahan_path = "assets/file/pengesahan/" . $pengesahan_name;
                 $ketersediaan_publikasi_path = "assets/file/ketersediaan_publikasi/" . $kesediaan_publikasi_name;
-                $bebas_lab_path = "C:\xampp\htdocs\E-CATALOG\assets\file\bebas_lab" . $bebas_lab_name;
+                $bebas_lab_path = "assets/file/bebas_lab" . $bebas_lab_name;
                 $poster = $_FILES['poster_ta']['name'];
                 $poster_tmp = $_FILES['poster_ta']['tmp_name'];
                 $poster_path = "assets/img/poster/" . $poster;
