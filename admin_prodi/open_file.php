@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
     
     if ($row) {
         // Lokasi file yang akan diunduh
-        $file_path = '../upload.php' . $row['path_bebas_lab'];
+        $file_path = '../' . $row['path_bebas_lab'];
        
         if (file_exists($file_path)) {
             // Mengatur header untuk mengindikasikan jenis konten dan attachment
