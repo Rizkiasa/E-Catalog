@@ -51,7 +51,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center">
-        <img src="assets/img/logo-uns-biru.png" alt="">
+        <img src="../assets/img/logo-uns-biru.png" alt="">
         <span class="d-none d-lg-block">E-CATALOG</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -105,7 +105,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>

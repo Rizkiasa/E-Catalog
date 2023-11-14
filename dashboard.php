@@ -85,6 +85,13 @@ include 'config.php';
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="logout.php">
+          <i class="bi bi-person"></i>
+          <span>Log-out</span>
+        </a>
+      </li>
       
   </aside><!-- End Sidebar-->
 
