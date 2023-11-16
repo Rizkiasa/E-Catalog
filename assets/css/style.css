@@ -823,6 +823,11 @@ body {
     height: 36px;
     transition: 0.3s;
   }
+
+  .center-footer{
+    display: flex;
+    justify-content: center;
+  }
   
   #footer .footer-top .social-links a:hover {
     background: #1acc8d;

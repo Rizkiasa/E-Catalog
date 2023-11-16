@@ -20,21 +20,15 @@ body {
   height: 100vh;
 }
 
-/* Header */
-h1 {
-  text-align: center;
-  padding: 20px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 24px;
-}
 
 .ta-list {
   margin-top: 20px;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   gap: 20px;
+  max-width: 100%;
 }
 
 .ta-item {
@@ -44,6 +38,7 @@ h1 {
   padding: 10px;
   max-width: 300px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 33px;
 }
 
 .ta-item img {
@@ -61,21 +56,6 @@ h1 {
   font-size: 14px;
   color: #777;
   margin-top: 5px;
-}
-
-/* Tautan kembali ke dashboard */
-a {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-a:hover {
-  color: #0056b3;
 }
 
 /* Tampilan responsif */

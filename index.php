@@ -66,8 +66,8 @@
               class="btn-get-started scrollto">LOGIN DOSEN</a>
             </div>
            <br> <div class="text-center text-lg-start">
-              <a href="https://sso.uns.ac.id/login" 
-              class="btn-get-started scrollto">LOGIN SSO UNS</a>
+              <a href="login_mahasiswa.php" 
+              class="btn-get-started scrollto">LOGIN MAHASISWA</a>
             </div>
           </div>
         </div>
@@ -170,23 +170,13 @@
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
-        <div class="row">
+        <div class="center-footer">
 
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-8 col-md-6">
             <div class="footer-info">
               <h3>E-CATALOG TA</h3>
               <p class="pb-3"><em>Website ini menyediakan berbagai macam tugas akhir mahasiswa universitas sebelas maret psdku madiun.</em></p>
             </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
           </div>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

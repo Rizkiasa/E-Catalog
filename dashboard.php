@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'config.php';
+if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["jurusan"])) {
+  echo '<script>alert("anda harus login dahulu untuk mengunjungi laman ini")</script>';
+  echo '<script>window.location.href = "login_mahasiswa.php";</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +36,7 @@ include 'config.php';
 
   <!-- Template Main CSS File -->
   <link href="assets/css/dashboard.css" rel="stylesheet">
+  <link href="assets/css/koleksi.css" rel="stylesheet">
 </head>
 
 <body>
@@ -114,12 +119,12 @@ include 'config.php';
 
             // Contoh query (Anda perlu menggantinya dengan query sesuai dengan database Anda):
             $sql = "SELECT id, penulis, poster_image, judul FROM tugas_akhir";
-            $result = mysqli_query($koneksi, $query);
+            $result = mysqli_query($koneksi, $sql);
 
 
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='ta-item'>";
-                echo "<img src='uploads/" . $row["poster"] . "' alt='Poster TA'>";
+                echo "<img src='assets/img/poster/" . $row["poster_image"] . "' alt='Poster TA' width = 300>";
                 echo "<h2>" . $row["judul"] . "</h2>";
                 echo "<p>" . $row["penulis"] . "</p>";
                 echo "</div>";
