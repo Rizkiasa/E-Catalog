@@ -133,7 +133,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
                 <tr>
                     <th scope="row"><?php echo $no++ ?></th>
                     <td><img src="../assets/img/poster/<?php echo $data['poster_image'] ?>" alt="Gambar Poster 1" class="img-thumbnail" style="max-width: 100px;"></td>
-                    <td><?php echo $data['bebas_lab_file'] ?> <a href="openfile.php?filename=<?php echo $data['bebas_lab_file'] ?>">download</a></td>
+                    <td><?php echo $data['bebas_lab_file'] ?> <a href="open_file.php?id=<?php echo $data['id'] ?>">download</a></td>
                     <td>
                     <a class="btn btn-success" onclick="return confirm('Apakah Anda yakin mengkonfirmasi data ini?')" href=""> <span> ACC </span><i class='bx bx-check'></i></a>
                     </td>
