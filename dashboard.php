@@ -125,8 +125,9 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='ta-item'>";
                 echo "<img src='assets/img/poster/" . $row["poster_image"] . "' alt='Poster TA' width = 300>";
-                echo "<h2>" . $row["judul"] . "</h2>";
-                echo "<p>" . $row["penulis"] . "</p>";
+                echo "<h3>" . $row["judul"] . "</h3>";
+                echo "<h2>" . $row["penulis"] . "</h2>";
+                echo "<a href='detail.php?id=" . $row["id"] . "'>Detail</a>";
                 echo "</div>";
             }
             ?>

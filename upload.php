@@ -120,6 +120,10 @@
                     <input type="text" id="judul" name="judul" required>
                 </div>
                 <div class="input-container">
+                    <label for="penulis">Nama Penulis:</label>
+                    <input type="text" id="penulis" name="penulis" required>
+                </div>
+                <div class="input-container">
                     <label for="abstrak">Abstrak:</label>
                     <textarea id="abstrak" name="abstrak" rows="4" required></textarea>
                 </div>
@@ -152,7 +156,7 @@
             if (isset($_POST['upload'])) {
                 $judul = $_POST['judul'];
                 $abstrak = $_POST['abstrak'];
-                $penulis = "Nama penulis";
+                $penulis = $_POST ["penulis"];
                 $link_github = $_POST['github_link'];
                 $pengesahan_name = $_FILES['pengesahan']['name'];
                 $bebas_lab_name = $_FILES['bebas_lab']['name'];
