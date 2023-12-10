@@ -2,13 +2,14 @@
 session_start();
 include '../config.php';
 
-// Cek apakah pengguna sudah login sebagai admin Prodi
+// Cek apakah pengguna sudah login sebagai dosen
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["role"])) {
-  echo '<script>alert("anda harus login sebagai dosen")</script>';
+  echo '<script>alert("Anda harus login sebagai dosen")</script>';
   echo '<script>window.location.href = "../login.php";</script>';
+  exit(); // tambahkan exit agar skrip berhenti di sini setelah melakukan redirect
 }
 
-// Halaman Admin Prodi
+
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +103,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Dashboa</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
@@ -111,8 +112,8 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
       </nav>
     </div>
     <?php
-    if ($_SESSION["role"] == "admin prodi") {
-      ?>
+    if ($_SESSION["role"] == "admin_prodi") {
+    ?>
       <table class="table">
             <thead>
                 <tr>
@@ -125,7 +126,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
             <tbody>
               <?php
               $no = 1;
-              $query = mysqli_query($koneksi, "SELECT id, penulis, poster_image, bebas_lab_file FROM tugas_akhir
+              $query = mysqli_query($koneksi, "SELECT id, penulis, poster_image, bebas_lab_name FROM tugas_akhir
               ORDER BY id DESC
               ");
                       while ($data = mysqli_fetch_assoc($query)) {
@@ -133,7 +134,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
                 <tr>
                     <th scope="row"><?php echo $no++ ?></th>
                     <td><img src="../assets/img/poster/<?php echo $data['poster_image'] ?>" alt="Gambar Poster 1" class="img-thumbnail" style="max-width: 100px;"></td>
-                    <td><?php echo $data['bebas_lab_file'] ?> <a href="open_file.php?id=<?php echo $data['id'] ?>">download</a></td>
+                    <td><?php echo $data['bebas_lab_name'] ?> <a href="open_file.php?id=<?php echo $data['id'] ?>">download</a></td>
                     <td>
                     <a class="btn btn-success" onclick="return confirm('Apakah Anda yakin mengkonfirmasi data ini?')" href=""> <span> ACC </span><i class='bx bx-check'></i></a>
                     </td>

@@ -124,8 +124,32 @@
                     <input type="text" id="penulis" name="penulis" required>
                 </div>
                 <div class="input-container">
+                    <label for="nim">NIM:</label>
+                    <input type="text" id="nim" name="nim" required>
+                </div>
+                <div class="input-container">
                     <label for="abstrak">Abstrak:</label>
                     <textarea id="abstrak" name="abstrak" rows="4" required></textarea>
+                </div>
+                <div class="input-container">
+                    <label for="bab_1">BAB 1:</label>
+                    <input type="file" id="bab_1" name="bab_1" accept=".doc,.docx,.pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="bab_2">BAB 2:</label>
+                    <input type="file" id="bab_2" name="bab_2" accept=".doc,.docx,.pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="bab_3">BAB 3:</label>
+                    <input type="file" id="bab_3" name="bab_3" accept=".doc,.docx,.pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="bab_4">BAB 4:</label>
+                    <input type="file" id="bab_4" name="bab_4" accept=".doc,.docx,.pdf" required>
+                </div>
+                <div class="input-container">
+                    <label for="bab_5">BAB 5:</label>
+                    <input type="file" id="bab_5" name="bab_5" accept=".doc,.docx,.pdf" required>
                 </div>
                 <div class="input-container">
                     <label for="pengesahan">Lembar Pengesahan (PDF):</label>
@@ -157,31 +181,80 @@
                 $judul = $_POST['judul'];
                 $abstrak = $_POST['abstrak'];
                 $penulis = $_POST ["penulis"];
+                $nim = $_POST["nim"];
+                $abstrak = $_POST['abstrak'];
                 $link_github = $_POST['github_link'];
                 $pengesahan_name = $_FILES['pengesahan']['name'];
                 $bebas_lab_name = $_FILES['bebas_lab']['name'];
                 $kesediaan_publikasi_name = $_FILES['kesediaan_publikasi']['name'];
+                $bab_1_name = $_FILES['bab_1']['name'];
+                $bab_2_name = $_FILES['bab_2']['name'];
+                $bab_3_name = $_FILES['bab_3']['name'];
+                $bab_4_name = $_FILES['bab_4']['name'];
+                $bab_5_name = $_FILES['bab_5']['name'];
                 $pengesahan_tmp = $_FILES['pengesahan']['tmp_name'];
                 $bebas_lab_tmp = $_FILES['bebas_lab']['tmp_name'];
                 $kesediaan_publikasi_tmp = $_FILES['kesediaan_publikasi']['tmp_name'];
+                $bab_1_tmp = $_FILES['bab_1']['tmp_name'];
+                $bab_2_tmp = $_FILES['bab_2']['tmp_name'];
+                $bab_3_tmp = $_FILES['bab_3']['tmp_name'];
+                $bab_4_tmp = $_FILES['bab_4']['tmp_name'];
+                $bab_5_tmp = $_FILES['bab_5']['tmp_name'];
                 $pengesahan_path = "assets/file/pengesahan/" . $pengesahan_name;
                 $ketersediaan_publikasi_path = "assets/file/ketersediaan_publikasi/" . $kesediaan_publikasi_name;
                 $bebas_lab_path = "assets/file/bebas_lab" . $bebas_lab_name;
+                $bab_1_path = "assets/file/bab_1/". $bab_1_name;
+                $bab_2_path = "assets/file/bab_2/". $bab_2_name;
+                $bab_3_path = "assets/file/bab_3/". $bab_3_name;
+                $bab_4_path = "assets/file/bab_4/". $bab_4_name;
+                $bab_5_path = "assets/file/bab_5/". $bab_5_name;
+
+
                 $poster = $_FILES['poster_ta']['name'];
                 $poster_tmp = $_FILES['poster_ta']['tmp_name'];
                 $poster_path = "assets/img/poster/" . $poster;
                 //query
-                $query =  "INSERT INTO tugas_akhir VALUES(NULL, '$judul' , '$penulis' , '$abstrak' , '$link_github' , '$pengesahan_name', '$bebas_lab_name', '$kesediaan_publikasi_name', '$pengesahan_path', '$ketersediaan_publikasi_path', '$bebas_lab_path', '$poster')";
+                $query =  "INSERT INTO tugas_akhir VALUES(
+                  NULL, 
+                  '$judul' , 
+                  '$penulis' , 
+                  '$nim' , 
+                  '$abstrak' , 
+                  '$bab_1_name',
+                  '$bab_2_name',
+                  '$bab_3_name',
+                  '$bab_4_name',
+                  '$bab_5_name', 
+                  '$pengesahan_name', 
+                  '$kesediaan_publikasi_name', 
+                  '$bebas_lab_name', 
+                  '$bab_1_path',
+                  '$bab_2_path',
+                  '$bab_3_path',
+                  '$bab_4_path',
+                  '$bab_5_path' ,  
+                  '$link_github' , 
+                  '$ketersediaan_publikasi_path', 
+                  '$pengesahan_path', 
+                  '$bebas_lab_path', 
+                  '$poster'
+                  )";
                 $result = mysqli_query($koneksi, $query);
 
                     if (!$result) {
                         die("Query gagal dijalankan: " . mysqli_error($koneksi) .
                             " - " . mysqli_error($koneksi));
                     } else {
+                      
                       move_uploaded_file($pengesahan_tmp, $pengesahan_path);
                       move_uploaded_file($bebas_lab_tmp, $bebas_lab_path);
                       move_uploaded_file($kesediaan_publikasi_tmp, $ketersediaan_publikasi_path);
                       move_uploaded_file($poster_tmp, $poster_path);
+                      move_uploaded_file($bab_1_tmp, $bab_1_path);
+                      move_uploaded_file($bab_2_tmp, $bab_2_path);
+                      move_uploaded_file($bab_3_tmp, $bab_3_path);
+                      move_uploaded_file($bab_4_tmp, $bab_4_path);
+                      move_uploaded_file($bab_5_tmp, $bab_5_path);
                         echo '<script>alert("Data berhasil ditambahkan")</script>';
                         echo '<script>window.location.href ="upload.php";</script>';
                         exit();

@@ -1,16 +1,17 @@
 <?php
-
+include 'config.php';
 // Menerima kriteria pencarian dari formulir search.php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $judul = $_POST["judul"];
+    $penulis = $_POST["penulis"];
  
-
     $sql = "SELECT * FROM tugas_akhir WHERE judul LIKE '%$judul%' AND penulis LIKE '%$penulis%'";
-    $result = mysqli_query($link, $sql);
+    $result = mysqli_query($koneksi, $sql);
 
     while ($row = mysqli_fetch_assoc($result)) {
         // Tampilkan data TA, misalnya judul, dan lainnya
         echo "<p>Judul: " . $row["judul"] . "</p>";
+        echo "<p>penulis: ". $row["penulis"] . "</p>";
         // ... tampilkan informasi lainnya sesuai kebutuhan
     }
 }

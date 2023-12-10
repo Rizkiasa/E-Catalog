@@ -42,35 +42,45 @@ include 'config.php';
                 </form>
 
                 <?php
-                if (isset($_POST["login"])) {
+if (isset($_POST["login"])) {
 
-                    $email = $_POST["email"];
-                    $pass = mysqli_real_escape_string($koneksi, md5($_POST['password']));
+    $email = $_POST["email"];
+    $pass = mysqli_real_escape_string($koneksi, md5($_POST['password']));
 
-                    $sql_aktif = mysqli_query($koneksi, "SELECT * FROM dosen WHERE email='$email'");
-                    $cek_akun_aktif = mysqli_num_rows($sql_aktif);
-                    $data_akun = mysqli_fetch_assoc($sql_aktif);
-                    $password = $data_akun['password'];
+    $sql_aktif = mysqli_query($koneksi, "SELECT * FROM dosen WHERE email='$email'");
+    $cek_akun_aktif = mysqli_num_rows($sql_aktif);
+    $data_akun = mysqli_fetch_assoc($sql_aktif);
+    $password = $data_akun['password'];
+    
 
-                    
-                        if ($cek_akun_aktif > 0) {
-                            if ($pass == $password) {
-                                $_SESSION['id'] = $data_akun['id'];
-                                $_SESSION['nama'] = $data_akun['nama'];
-                                $_SESSION['role'] = $data_akun['role'];
+    if ($cek_akun_aktif > 0) {
+        if ($pass == $password) {
+            $_SESSION['id'] = $data_akun['id'];
+            $_SESSION['nama'] = $data_akun['nama'];
+            $_SESSION['role'] = $data_akun['role'];
 
-                                echo '<script>window.location.href = "admin_prodi/dashboard_admin_prodi.php";</script>';
-                            } else {
-                                echo "<script>
-                    alert('password Anda salah');
-                </script>";
-                            }
-                        } else {
-                            echo '<script>alert("Akun Anda belum terdaftar")</script>';
-                            echo '<script>window.location.href = "register.php";</script>';
-                        }
-                }
-                ?>
+            // Redirect sesuai peran (role)
+            switch ($_SESSION['role']) {
+                case 'admin_prodi':
+                    echo '<script>window.location.href = "admin_prodi/dashboard_admin_prodi.php";</script>';
+                    break;
+                case 'dosen':
+                    echo '<script>window.location.href = "dosen/dashboard_dosen.php";</script>';
+                    break;
+                case 'koordinator':
+                    echo '<script>window.location.href = "koordinator/dashboard_koordinator.php";</script>';
+                    break;
+            }
+        } else {
+            echo "<script>alert('Password Anda salah');</script>";
+        }
+    } else {
+        echo '<script>alert("Akun Anda belum terdaftar")</script>';
+        echo '<script>window.location.href = "register.php";</script>';
+    }
+}
+?>
+
             </div>
         </div>
     </div>
