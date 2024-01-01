@@ -2,13 +2,28 @@
 session_start();
 include '../config.php';
 
-// Cek apakah pengguna sudah login sebagai admin Prodi
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["role"])) {
-  echo '<script>alert("anda harus login sebagai dosen")</script>';
-  echo '<script>window.location.href = "../login.php";</script>';
+    echo '<script>alert("Anda harus login sebagai dosen")</script>';
+    echo '<script>window.location.href = "../login.php";</script>';
+    exit();
 }
 
-// Halaman Admin Prodi
+// Proses ACC tugas akhir dari dosen koordinator
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["acc"])) {
+    if ($_SESSION["role"] == "dosen koordinator") {
+        $tugasAkhirId = $_GET["id"];
+
+        // Update status tugas akhir menjadi "acc"
+        $updateQuery = "UPDATE tugas_akhir SET status='sudah acc' WHERE id='$tugasAkhirId'";
+        $updateResult = mysqli_query($koneksi, $updateQuery);
+
+        if ($updateResult) {
+                echo '<script>alert("Tugas Akhir berhasil di-ACC dan diunggah ke halaman mahasiswa")</script>';
+            } else {
+                echo '<script>alert("Gagal meng-ACC tugas akhir")</script>';
+            }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +79,6 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
       </form>
     </div><!-- End Search Bar -->
 
-    
-
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
@@ -110,49 +123,55 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
         </ol>
       </nav>
     </div>
+    <section class="section">
     <div class="container">
-    <?php if ($_SESSION["role"] == "koordinator") : ?>
+      <?php if ($_SESSION["role"] == "dosen koordinator") : ?>
         <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Judul</th>
-                    <th scope="col">Penulis</th>
-                    <th scope="col">Abstrak</th>
-                    <th scope="col">Lembar Pengesahan</th>
-                    <th scope="col">Kesediaan Publikasi</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $no = 1;
-                $query = mysqli_query($koneksi, "SELECT id, judul, penulis, abstrak, lembar_pengesahan_name, kesediaan_publikasi_name FROM tugas_akhir ORDER BY id DESC");
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Judul</th>
+              <th scope="col">Penulis</th>
+              <th scope="col">Abstrak</th>
+              <th scope="col">Lembar Pengesahan</th>
+              <th scope="col">Kesediaan Publikasi</th>
+              <th scope="col">Download</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $no = 1;
+            $query = mysqli_query($koneksi, "SELECT id, judul, penulis, abstrak, pengesahan_name, ketersediaan_publikasi_name FROM tugas_akhir WHERE status = 'belum acc' ORDER BY id DESC");
 
-                if (!$query) {
-                    die("Query error: " . mysqli_error($koneksi));
-                }
+            if (!$query) {
+              die("Query error: " . mysqli_error($koneksi));
+            }
 
-                while ($data = mysqli_fetch_assoc($query)) :
-                ?>
-                    <tr>
-                        <th scope="row"><?php echo $no++ ?></th>
-                        <td><?php echo $data['judul']; ?></td>
-                        <td><?php echo $data['penulis']; ?></td>
-                        <td><?php echo $data['abstrak']; ?></td>
-                        <td>
-                            <a href="open_file.php?id=<?php echo $data['id']; ?>">Download</a>
-                        </td>
-                        <td><?php echo $data['kesediaan_publikasi_name']; ?></td>
-                        <td><?php echo $data['lembar_pengesahan_name']; ?></td>
-                        <td>
-                            <a class="btn btn-success" onclick="return confirm('Apakah Anda yakin mengkonfirmasi data ini?')" href=""> <span> ACC </span><i class='bx bx-check'></i></a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
+            while ($data = mysqli_fetch_assoc($query)) :
+            ?>
+              <tr>
+                <th scope="row"><?php echo $no++ ?></th>
+                <td><?php echo $data['judul']; ?></td>
+                <td><?php echo $data['penulis']; ?></td>
+                <td><?php echo $data['abstrak']; ?></td>
+                <td><?php echo $data['ketersediaan_publikasi_name']; ?></td>
+                <td><?php echo $data['pengesahan_name']; ?></td>
+                <td>
+                  <a href="open_file.php?id=<?php echo $data['id']; ?>">Download</a>
+                </td>
+                <td>
+                  <form method="post" action="?id=<?php echo $data['id']; ?>">
+                    <button class="btn btn-success" onclick="return confirm('Apakah Anda yakin mengkonfirmasi data ini?')" type="submit" name="acc">
+                      <i class='bx bxs-like bx-fade-up-hover'></i><span> Upload </span>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          </tbody>
         </table>
-    <?php endif; ?>
+      <?php endif; ?>
 </div>
     
   </main><!-- End #main -->

@@ -8,12 +8,13 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
     // Ambil data tugas akhir berdasarkan ID dari database
-    $sql = "SELECT judul, penulis, poster_image, abstrak, github_link FROM tugas_akhir WHERE id = $id";
+    $sql = "SELECT judul, penulis, nim, poster_image, abstrak, github_link FROM tugas_akhir WHERE id = $id";
     $result = mysqli_query($koneksi, $sql);
 
     if ($row = mysqli_fetch_assoc($result)) {
         $judul = $row["judul"];
         $penulis = $row["penulis"];
+        $nim = $row["nim"]; 
         $poster = $row["poster_image"];
         $abstrak = $row["abstrak"];
         $githubLink = $row["github_link"];
@@ -35,6 +36,7 @@ if (isset($_GET["id"])) {
             <img src="assets/img/poster/<?php echo $poster; ?>" alt="Poster TA" width="100px">
             <h2><?php echo $judul; ?></h2>
             <p><strong>Penulis:</strong> <?php echo $penulis; ?></p>
+            <p><strong>NIM:</strong> <?php echo $nim; ?></p>
             <p><strong>Abstrak:</strong> <?php echo $abstrak; ?></p>
             <p><strong>Link GitHub:</strong> <a href="<?php echo $githubLink; ?>" target="_blank"><?php echo $githubLink; ?></a></p>
         </div>

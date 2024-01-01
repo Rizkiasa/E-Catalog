@@ -61,13 +61,13 @@ if (isset($_POST["login"])) {
 
             // Redirect sesuai peran (role)
             switch ($_SESSION['role']) {
-                case 'admin_prodi':
+                case 'admin prodi':
                     echo '<script>window.location.href = "admin_prodi/dashboard_admin_prodi.php";</script>';
                     break;
                 case 'dosen':
                     echo '<script>window.location.href = "dosen/dashboard_dosen.php";</script>';
                     break;
-                case 'koordinator':
+                case 'dosen koordinator':
                     echo '<script>window.location.href = "koordinator/dashboard_koordinator.php";</script>';
                     break;
             }

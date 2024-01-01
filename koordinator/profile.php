@@ -40,8 +40,6 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
       <link href="../assets/vendoor/quill/quill.snow.css" rel="stylesheet">
       <link href="../assets/vendoor/quill/quill.bubble.css" rel="stylesheet">
       <link href="../assets/vendoor/remixicon/remixicon.css" rel="stylesheet">
-      <link href="../assets/vendoor/simple-datatables/dashboar.css" rel="stylesheet">
-
       <!-- Template Main CSS File -->
       <link href="../assets/css/dashboard.css" rel="stylesheet">
     </head>
@@ -75,7 +73,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
         <ul class="sidebar-nav" id="sidebar-nav">
 
           <li class="nav-item">
-            <a class="nav-link collapsed" href="dashboard_admin_prodi.php">
+            <a class="nav-link collapsed" href="dashboard_koordinator.php">
               <i class="bi bi-grid"></i>
               <span>Dashboard</span>
             </a>
@@ -150,7 +148,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
                         Password</button>
                     </li>
 
-                    </ul>
+                  </ul>
                   <div class="tab-content pt-2">
                     <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                       <!-- Profile Edit Form -->
@@ -288,88 +286,89 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
                     ?>
 
 
-                    </div>
+                  </div>
 
-                    <div class="tab-pane fade pt-3" id="profile-change-password">
-                      <!-- Change Password Form -->
-                      <form method='POST'>
+                  <div class="tab-pane fade pt-3" id="profile-change-password">
+                    <!-- Change Password Form -->
+                    <form method='POST'>
 
-                        <div class="row mb-3">
-                          <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                          <div class="col-md-8 col-lg-9">
-                            <input name="password" type="password" class="form-control" id="currentPassword">
-                          </div>
+                      <div class="row mb-3">
+                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input name="password" type="password" class="form-control" id="currentPassword">
                         </div>
+                      </div>
 
-                        <div class="row mb-3">
-                          <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                          <div class="col-md-8 col-lg-9">
-                            <input name="newpassword" type="password" class="form-control" id="newPassword">
-                          </div>
+                      <div class="row mb-3">
+                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input name="newpassword" type="password" class="form-control" id="newPassword">
                         </div>
+                      </div>
 
-                        <div class="row mb-3">
-                          <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                          <div class="col-md-8 col-lg-9">
-                            <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                          </div>
+                      <div class="row mb-3">
+                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input name="renewpassword" type="password" class="form-control" id="renewPassword">
                         </div>
+                      </div>
 
-                        <div class="text-center">
-                          <button name="Submit_change_password" type="submit" class="btn btn-primary">Change
-                            Password</button>
-                        </div>
-                    </div>
-                    </form><!-- End Change Password Form -->
-                    <?php
+                      <div class="text-center">
+                        <button name="Submit_change_password" type="submit" class="btn btn-primary">Change
+                          Password</button>
+                      </div>
+                  </div>
+                  </form><!-- End Change Password Form -->
+                  <?php
 
-                    // Proses penggantian password
-                    if (isset($_POST['Submit_change_password'])) {
-                      $currentPassword = $_POST['password'];
-                      $newPassword = $_POST['newpassword'];
-                      $renewPassword = $_POST['renewpassword'];
+                  // Proses penggantian password
+                  if (isset($_POST['Submit_change_password'])) {
+                    $currentPassword = $_POST['password'];
+                    $newPassword = $_POST['newpassword'];
+                    $renewPassword = $_POST['renewpassword'];
 
-                      // Ambil hash password MD5 dari database
-                      $query = mysqli_query($koneksi, "SELECT password FROM dosen WHERE id =" . $_SESSION['id']);
-                      $userData = mysqli_fetch_assoc($query);
-                      $md5PasswordFromDB = $userData['password'];
+                    // Ambil hash password MD5 dari database
+                    $query = mysqli_query($koneksi, "SELECT password FROM dosen WHERE id =" . $_SESSION['id']);
+                    $userData = mysqli_fetch_assoc($query);
+                    $md5PasswordFromDB = $userData['password'];
 
-                      // Validasi password saat ini
-                      if (md5($currentPassword) == $md5PasswordFromDB) {
-                        // Validasi password baru
-                        if ($newPassword == $renewPassword) {
-                          // Ubah password baru ke MD5
-                          $md5Password = md5($newPassword);
+                    // Validasi password saat ini
+                    if (md5($currentPassword) == $md5PasswordFromDB) {
+                      // Validasi password baru
+                      if ($newPassword == $renewPassword) {
+                        // Ubah password baru ke MD5
+                        $md5Password = md5($newPassword);
 
-                          // Update password di database
-                          $updateQuery = "UPDATE dosen SET password='$md5Password' WHERE id =" . $_SESSION['id'];
-                          $updateResult = mysqli_query($koneksi, $updateQuery);
+                        // Update password di database
+                        $updateQuery = "UPDATE dosen SET password='$md5Password' WHERE id =" . $_SESSION['id'];
+                        $updateResult = mysqli_query($koneksi, $updateQuery);
 
-                          if ($updateResult) {
-                            echo '<script>alert("Password berhasil diubah")</script>';
-                            echo '<script>window.location.href = "profile.php";</script>';
-                            exit();
-                          } else {
-                            echo '<script>alert("Gagal mengubah password")</script>';
-                            echo '<script>window.location.href = "profile.php";</script>';
-                          }
+                        if ($updateResult) {
+                          echo '<script>alert("Password berhasil diubah")</script>';
+                          echo '<script>window.location.href = "profile.php";</script>';
+                          exit();
                         } else {
-                          echo '<script>alert("Password baru tidak cocok")</script>';
+                          echo '<script>alert("Gagal mengubah password")</script>';
                           echo '<script>window.location.href = "profile.php";</script>';
                         }
                       } else {
-                        echo '<script>alert("Password saat ini tidak valid")</script>';
+                        echo '<script>alert("Password baru tidak cocok")</script>';
                         echo '<script>window.location.href = "profile.php";</script>';
                       }
+                    } else {
+                      echo '<script>alert("Password saat ini tidak valid")</script>';
+                      echo '<script>window.location.href = "profile.php";</script>';
                     }
-                    ?>
+                  }
+                  ?>
 
-                  </div>
 
-                </div><!-- End Bordered Tabs -->
+                </div>
 
-              </div>
+              </div><!-- End Bordered Tabs -->
+
             </div>
+          </div>
 
           </div>
           </div>

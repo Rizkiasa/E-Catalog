@@ -1,9 +1,11 @@
 <?php
 session_start();
 include 'config.php';
+
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["jurusan"])) {
-  echo '<script>alert("anda harus login dahulu untuk mengunjungi laman ini")</script>';
+  echo '<script>alert("Anda harus login dahulu untuk mengunjungi laman ini")</script>';
   echo '<script>window.location.href = "login_mahasiswa.php";</script>';
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -23,7 +25,9 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendoor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +63,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
       </form>
     </div><!-- End Search Bar -->
 
-    
+
 
   </header><!-- End Header -->
 
@@ -97,7 +101,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
           <span>Log-out</span>
         </a>
       </li>
-      
+
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
@@ -113,25 +117,27 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
     </div><!-- End Page Title -->
 
     <div class="ta-list">
-            <?php
-            $sql = "SELECT id, penulis, poster_image, judul FROM tugas_akhir";
-            $result = mysqli_query($koneksi, $sql);
+
+      <?php
+      $sql = "SELECT id, penulis, poster_image, judul FROM tugas_akhir WHERE status = 'sudah acc'";
+      $result = mysqli_query($koneksi, $sql);
 
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<div class='ta-item'>";
-                echo "<img src='assets/img/poster/" . $row["poster_image"] . "' alt='Poster TA' width = 300>";
-                echo "<h3>" . $row["judul"] . "</h3>";
-                echo "<h2>" . $row["penulis"] . "</h2>";
-                echo "<a href='detail.php?id=" . $row["id"] . "'>Detail</a>";
-                echo "</div>";
-            }
-            ?>
-        </div>
-        
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo "<div class='ta-item'>";
+        echo "<img src='assets/img/poster/" . $row["poster_image"] . "' alt='Poster TA' width = 300>";
+        echo "<h3>" . $row["judul"] . "</h3>";
+        echo "<h2>" . $row["penulis"] . "</h2>";
+        echo "<a href='detail.php?id=" . $row["id"] . "'>Detail</a>";
+        echo "</div>";
+      }
+      ?>
+    </div>
+
   </main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendoor/apexcharts/apexcharts.min.js"></script>

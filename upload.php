@@ -24,7 +24,6 @@
   <link href="assets/vendoor/quill/quill.snow.css" rel="stylesheet">
   <link href="assets/vendoor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendoor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendoor/simple-datatables/dashboar.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/dashboard.css" rel="stylesheet">
@@ -90,6 +89,13 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="logout.php">
+          <i class="bi bi-person"></i>
+          <span>Log-out</span>
+        </a>
+      </li>
 
     </ul>
 
@@ -153,7 +159,7 @@
                 </div>
                 <div class="input-container">
                     <label for="pengesahan">Lembar Pengesahan (PDF):</label>
-                    <input type="file" id="pengesahan" name="pengesahan" accept=".pdf" required>
+                    <input type="file" id="pengesahan" name="pengesahan" accept=".doc,.docx,.pdf" required>
                 </div>
                 <div class="input-container">
                     <label for="bebas_lab">Lembar Bebas Lab (File):</label>
@@ -237,7 +243,8 @@
                   '$ketersediaan_publikasi_path', 
                   '$pengesahan_path', 
                   '$bebas_lab_path', 
-                  '$poster'
+                  '$poster',
+                  'belum acc'
                   )";
                 $result = mysqli_query($koneksi, $query);
 

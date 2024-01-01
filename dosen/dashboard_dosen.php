@@ -6,16 +6,16 @@ include '../config.php';
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["role"])) {
     echo '<script>alert("Anda harus login sebagai dosen")</script>';
     echo '<script>window.location.href = "../login.php";</script>';
-    exit;
+    exit();
 }
 
 // Ambil data tugas akhir mahasiswa
-$sql_tugas_akhir = "SELECT id, judul, penulis FROM tugas_akhir";
-$result_tugas_akhir = mysqli_query($koneksi, $id);
+$sql_tugas_akhir = "SELECT * FROM tugas_akhir";
+$result_tugas_akhir = mysqli_query($koneksi, $sql_tugas_akhir);
 
 // Ambil data dokumen tugas akhir
-$sql_tugas_akhir = "SELECT id, penulis, bab1, bab2, bab3, bab4, bab5 FROM tugas_akhir";
-$result_tugas_akhir = mysqli_query($koneksi, $id);
+$sql_tugas_akhir2 = "SELECT id, penulis, bab_1_name, bab_2_name, bab_3_name, bab_4_name, bab_5_name FROM tugas_akhir";
+$result_tugas_akhir2 = mysqli_query($koneksi, $sql_tugas_akhir2);
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ $result_tugas_akhir = mysqli_query($koneksi, $id);
   <title>Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  
   <!-- Favicons -->
   <link href="../assets/img/logo-uns-biru.png" rel="icon">
   <link href="../assets/img/logo-uns-biru.png" rel="apple-touch-icon">
@@ -153,15 +153,15 @@ $result_tugas_akhir = mysqli_query($koneksi, $id);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row_tugas_akhir = mysqli_fetch_assoc($result_tugas_akhir)) : ?>
+                    <?php while ($row_tugas_akhir = mysqli_fetch_assoc($result_tugas_akhir2)) : ?>
                         <tr>
                             <td><?= $row_tugas_akhir["id"]; ?></td>
                             <td><?= $row_tugas_akhir["penulis"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab1"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab2"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab3"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab4"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab5"]; ?></td>
+                            <td><?= $row_tugas_akhir["bab_1_name"]; ?></td>
+                            <td><?= $row_tugas_akhir["bab_2_name"]; ?></td>
+                            <td><?= $row_tugas_akhir["bab_3_name"]; ?></td>
+                            <td><?= $row_tugas_akhir["bab_4_name"]; ?></td>
+                            <td><?= $row_tugas_akhir["bab_5_name"]; ?></td>
                             <td><a href='download.php?id=<?= $row_tugas_akhir["id"]; ?>'>Unduh</a></td>
                         </tr>
                     <?php endwhile; ?>

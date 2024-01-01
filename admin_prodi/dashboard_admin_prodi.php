@@ -6,11 +6,17 @@ include '../config.php';
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["role"])) {
   echo '<script>alert("Anda harus login sebagai dosen")</script>';
   echo '<script>window.location.href = "../login.php";</script>';
-  exit(); // tambahkan exit agar skrip berhenti di sini setelah melakukan redirect
+  exit();
 }
 
+if ($_SESSION["role"] != "admin prodi") {
+  echo '<script>alert("Anda tidak memiliki izin untuk mengakses halaman ini")</script>';
+  echo '<script>window.location.href = "dashboard_admin_prodi.php";</script>';
+  exit();
+}
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +35,9 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendoor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +73,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
       </form>
     </div><!-- End Search Bar -->
 
-    
+
 
   </header><!-- End Header -->
 
@@ -97,13 +105,13 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
           <span>Log-out</span>
         </a>
       </li>
-      
+
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboa</h1>
+      <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
@@ -112,45 +120,56 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ro
       </nav>
     </div>
     <?php
-    if ($_SESSION["role"] == "admin_prodi") {
-    ?>
+    if ($_SESSION["role"] == "admin prodi") {
+      ?>
       <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Gambar Poster</th>
-                    <th scope="col">Berkas Bebas Lab</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-              <?php
-              $no = 1;
-              $query = mysqli_query($koneksi, "SELECT id, penulis, poster_image, bebas_lab_name FROM tugas_akhir
-              ORDER BY id DESC
-              ");
-                      while ($data = mysqli_fetch_assoc($query)) {
-              ?>
-                <tr>
-                    <th scope="row"><?php echo $no++ ?></th>
-                    <td><img src="../assets/img/poster/<?php echo $data['poster_image'] ?>" alt="Gambar Poster 1" class="img-thumbnail" style="max-width: 100px;"></td>
-                    <td><?php echo $data['bebas_lab_name'] ?> <a href="open_file.php?id=<?php echo $data['id'] ?>">download</a></td>
-                    <td>
-                    <a class="btn btn-success" onclick="return confirm('Apakah Anda yakin mengkonfirmasi data ini?')" href=""> <span> ACC </span><i class='bx bx-check'></i></a>
-                    </td>
-                </tr>
-                <?php
-                      }
-                ?>
-            </tbody>
-        </table>
-        <?php } ?>
-      
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Gambar Poster</th>
+            <th scope="col">Berkas Bebas Lab</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $no = 1;
+          $query = mysqli_query($koneksi, "SELECT id, penulis, poster_image, bebas_lab_name, status FROM tugas_akhir
+                ORDER BY id DESC
+            ");
 
-    
+          while ($data = mysqli_fetch_assoc($query)) {
+            ?>
+            <tr>
+              <th scope="row">
+                <?php echo $no++ ?>
+              </th>
+              <td><img src="../assets/img/poster/<?php echo $data['poster_image'] ?>" alt="Gambar Poster 1"
+                  class="img-thumbnail" style="max-width: 100px;"></td>
+              <td>
+                <?php echo $data['bebas_lab_name'] ?>
+              </td>
+              <td>
+                <a class="btn btn-success" onclick href="open_file.php?id=<?php echo $data['id'] ?>">
+                  Download</i>
+                </a>
+                <?php ?>
+              </td>
+            </tr>
+            <?php
+          }
+          ?>
+
+        </tbody>
+      </table>
+    <?php } ?>
+
+
+
   </main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendoor/apexcharts/apexcharts.min.js"></script>
