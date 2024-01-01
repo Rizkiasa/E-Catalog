@@ -3,7 +3,7 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["jurusan"])) {
-  echo '<script>alert("Anda harus login dahulu untuk mengunjungi laman ini")</script>';
+  echo '<script>alert("Anda harus login sebagai mahasiswa untuk mengunjungi laman ini")</script>';
   echo '<script>window.location.href = "login_mahasiswa.php";</script>';
   exit();
 }
