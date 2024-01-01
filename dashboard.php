@@ -114,10 +114,6 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
 
     <div class="ta-list">
             <?php
-            // Di sini Anda dapat mengambil daftar TA dari database
-            // Misalnya, menggunakan SQL query untuk mengambil judul, penulis, dan poster
-
-            // Contoh query (Anda perlu menggantinya dengan query sesuai dengan database Anda):
             $sql = "SELECT id, penulis, poster_image, judul FROM tugas_akhir";
             $result = mysqli_query($koneksi, $sql);
 
