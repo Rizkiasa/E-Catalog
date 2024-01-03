@@ -158,15 +158,15 @@
                     <input type="file" id="bab_5" name="bab_5" accept=".doc,.docx,.pdf" required>
                 </div>
                 <div class="input-container">
-                    <label for="pengesahan">Lembar Pengesahan (PDF):</label>
+                    <label for="pengesahan">Lembar Pengesahan :</label>
                     <input type="file" id="pengesahan" name="pengesahan" accept=".doc,.docx,.pdf" required>
                 </div>
                 <div class="input-container">
-                    <label for="bebas_lab">Lembar Bebas Lab (File):</label>
+                    <label for="bebas_lab">Lembar Bebas Lab :</label>
                     <input type="file" id="bebas_lab" name="bebas_lab" accept=".doc,.docx,.pdf" required>
                 </div>
                 <div class="input-container">
-                    <label for="kesediaan_publikasi">Lembar Kesediaan Publikasi (File):</label>
+                    <label for="kesediaan_publikasi">Lembar Kesediaan Publikasi :</label>
                     <input type="file" id="kesediaan_publikasi" name="kesediaan_publikasi" accept=".doc,.docx,.pdf" required>
                 </div>
                 <div class="input-container">
@@ -207,8 +207,8 @@
                 $bab_4_tmp = $_FILES['bab_4']['tmp_name'];
                 $bab_5_tmp = $_FILES['bab_5']['tmp_name'];
                 $pengesahan_path = "assets/file/pengesahan/" . $pengesahan_name;
-                $ketersediaan_publikasi_path = "assets/file/ketersediaan_publikasi/" . $kesediaan_publikasi_name;
                 $bebas_lab_path = "assets/file/bebas_lab" . $bebas_lab_name;
+                $ketersediaan_publikasi_path = "assets/file/ketersediaan_publikasi/" . $kesediaan_publikasi_name;
                 $bab_1_path = "assets/file/bab_1/". $bab_1_name;
                 $bab_2_path = "assets/file/bab_2/". $bab_2_name;
                 $bab_3_path = "assets/file/bab_3/". $bab_3_name;
