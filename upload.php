@@ -207,7 +207,7 @@
                 $bab_4_tmp = $_FILES['bab_4']['tmp_name'];
                 $bab_5_tmp = $_FILES['bab_5']['tmp_name'];
                 $pengesahan_path = "assets/file/pengesahan/" . $pengesahan_name;
-                $bebas_lab_path = "assets/file/bebas_lab" . $bebas_lab_name;
+                $bebas_lab_path = "assets/file/bebas_lab/" . $bebas_lab_name;
                 $ketersediaan_publikasi_path = "assets/file/ketersediaan_publikasi/" . $kesediaan_publikasi_name;
                 $bab_1_path = "assets/file/bab_1/". $bab_1_name;
                 $bab_2_path = "assets/file/bab_2/". $bab_2_name;
