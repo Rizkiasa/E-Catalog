@@ -22,11 +22,11 @@ if (isset($_GET["id"])) {
         $zip = new ZipArchive();
         $zipFileName = tempnam(sys_get_temp_dir(), "tugas_akhir");
         if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
-            $zip->addFile($row["path_bab_1"], 'bab1.docx'); 
-            $zip->addFile($row["path_bab_2"], 'bab2.docx'); 
-            $zip->addFile($row["path_bab_3"], 'bab3.docx'); 
-            $zip->addFile($row["path_bab_4"], 'bab4.docx'); 
-            $zip->addFile($row["path_bab_5"], 'bab5.docx'); 
+            $zip->addFile($row["path_bab_1"], '.doc,.docx,.pdf'); 
+            $zip->addFile($row["path_bab_2"], '.doc,.docx,.pdf'); 
+            $zip->addFile($row["path_bab_3"], '.doc,.docx,.pdf'); 
+            $zip->addFile($row["path_bab_4"], '.doc,.docx,.pdf'); 
+            $zip->addFile($row["path_bab_5"], '.doc,.docx,.pdf'); 
             $zip->close();
 
             // Debugging: Output content of variables

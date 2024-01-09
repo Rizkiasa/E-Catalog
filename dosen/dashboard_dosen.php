@@ -107,7 +107,7 @@ $result_tugas_akhir2 = mysqli_query($koneksi, $sql_tugas_akhir2);
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-        <div class="pagetitle">
+        <div class="pagetitle" >
             <h1>Dashboard</h1>
             <nav>
                 <ol class="breadcrumb">
@@ -116,7 +116,7 @@ $result_tugas_akhir2 = mysqli_query($koneksi, $sql_tugas_akhir2);
                 </ol>
             </nav>
         </div>
-        <div class="container">
+        <div class="container" style='height: 200px'>
             <h2>Data Mahasiswa</h2>
             <table class="table">
                 <thead>
