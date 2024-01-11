@@ -40,6 +40,7 @@ if (isset($_GET["id"])) {
             <p><strong>Abstrak:</strong> <?php echo $abstrak; ?></p>
             <p><strong>Link GitHub:</strong> <a href="<?php echo $githubLink; ?>" target="_blank"><?php echo $githubLink; ?></a></p>
         </div>
+        <a href="dashboard.php" class="btn-back">Kembali ke Dashboard</a>
     </div>
 </body>
 </html>

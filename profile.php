@@ -5,7 +5,7 @@ include 'config.php';
 // Cek apakah pengguna sudah login
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["jurusan"])) {
     echo '<script>alert("Anda harus login dahulu")</script>';
-    echo '<script>window.location.href = "../login.php";</script>';
+    echo '<script>window.location.href = "login_mahasiswa.php";</script>';
 } else {
     $query = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE id =" . $_SESSION['id']);
     while ($data = mysqli_fetch_assoc($query)) {

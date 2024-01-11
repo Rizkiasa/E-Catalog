@@ -120,21 +120,28 @@ if (isset($_POST['cari'])) {
     $judul = $_POST['cari'];
     $penulis = $_POST['cari'];
 
-    $query = "SELECT judul, penulis, poster_image FROM tugas_akhir WHERE judul LIKE '%$judul%' OR penulis LIKE '%$penulis%'";
+    $query = "SELECT id, judul, penulis, poster_image FROM tugas_akhir WHERE judul LIKE '%$judul%' OR penulis LIKE '%$penulis%'";
     $result = mysqli_query($koneksi, $query);
 
     echo "<h2>Hasil Pencarian untuk '$judul'</h2>";
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<div class='ta-item'>";
-        echo "<img src='assets/img/poster/" . $row["poster_image"] . "' alt='Poster TA' width = 300>";
-        echo "<h3>Judul: " . $row['judul'] . "</h3>";
-        echo "<p>Nama Mahasiswa: " . $row['penulis'] . "</p>";
-        echo "</div>";
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<div class='ta-item'>";
+            echo "<img src='assets/img/poster/" . $row["poster_image"] . "' alt='Poster TA' width = 300>";
+            echo "<h3>Judul: " . $row['judul'] . "</h3>";
+            echo "<p>Nama Mahasiswa: " . $row['penulis'] . "</p>";
+            echo "<a href='detail.php?id=" . $row["id"] . "'>Detail</a>";
+            echo "</div>";
+        }
+    } else {
+        echo "<p>Tugas Akhir tidak terdaftar.</p>";
     }
+    
+    mysqli_close($koneksi);
 }
-mysqli_close($koneksi);
 ?>
+</div>
 
   </main><!-- End #main -->
 
