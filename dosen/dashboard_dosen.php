@@ -107,7 +107,7 @@ $result_tugas_akhir2 = mysqli_query($koneksi, $sql_tugas_akhir2);
                 </ol>
             </nav>
         </div>
-        <div class="container" style='height: 200px'>
+        <div class="container" style='height: auto'>
             <h2>Data Mahasiswa</h2>
             <table class="table">
                 <thead>

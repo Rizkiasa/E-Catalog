@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["acc"])) {
       </nav>
     </div>
     <section class="section">
-    <div class="container" style='height: 100px' ;>
+    <div class="container" style='height: auto' ;>
       <?php if ($_SESSION["role"] == "dosen koordinator") : ?>
         <table class="table">
           <thead>
