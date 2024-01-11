@@ -57,15 +57,13 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["ju
     </div><!-- End Logo -->
 
     <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="hasil_pencarian.php">
-        <input type="text" id="judul" name="judul" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+  <form class="search-form d-flex align-items-center" method="POST" action="hasil_pencarian.php">
+    <input type="text" id="cari" name="cari" placeholder="Search by Judul or Penulis" title="Enter search keyword">
+    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+  </form>
+</div>
 
-
-
-  </header><!-- End Header -->
+  </header>
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
