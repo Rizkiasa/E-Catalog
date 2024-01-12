@@ -1,37 +1,48 @@
 <?php
 include '../config.php';
- 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $data = mysqli_query($koneksi, "SELECT * FROM tugas_akhir WHERE id = $id");
-    
-    // Perbaikan: Ambil data dengan mysqli_fetch_assoc
-    $row = mysqli_fetch_assoc($data);
-    
-    if ($row) {
-        // Lokasi file yang akan diunduh
-        $file_path = '../'.$row['path_pengesahan'];
-        $file_path = '../'.$row['path_ketersediaan'];
-        if (file_exists($file_path)) {
-            // Mengatur header untuk mengindikasikan jenis konten dan attachment
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . basename($file_path));
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($file_path));
-            
-            // Membaca file dan mengirimkannya ke output
-            readfile($file_path);
-            exit;
+
+// Cek apakah parameter id diterima
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+
+    // Ambil nama file dari database berdasarkan ID
+    $sql = "SELECT penulis, path_pengesahan, path_ketersediaan FROM tugas_akhir WHERE id = $id";
+    $result = mysqli_query($koneksi, $sql);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        // Mendefinisikan header untuk memastikan bahwa file dianggap sebagai file unduhan
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $row["penulis"] . '_dokumen_pelengkap.zip');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+
+        // Membuka file dan mengirimkan kontennya ke output
+        $zip = new ZipArchive();
+        $zipFileName = tempnam(sys_get_temp_dir(), "tugas_akhir");
+        if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
+            $zip->addFile($row["path_pengesahan"], '.doc,.docx,.pdf'); 
+            $zip->addFile($row["path_ketersediaan_publikasi"], '.doc,.docx,.pdf'); 
+            $zip->close();
+
+            // Debugging: Output content of variables
+            var_dump($row["path_pengesahan"], $row["path_ketersediaan_publikasi"]);
+
+            // Mengirimkan file ZIP ke output
+            readfile($zipFileName);
+
+            // Menghapus file ZIP sementara setelah dikirim
+            unlink($zipFileName);
         } else {
-            echo 'File not found.';
+            echo "Gagal membuat file ZIP.";
         }
+
+        exit();
     } else {
-        echo 'Data not found.';
+        echo "Data tidak ditemukan untuk ID: $id";
     }
 } else {
-    echo 'Invalid request.';
+    echo "ID tidak diterima.";
 }
 ?>

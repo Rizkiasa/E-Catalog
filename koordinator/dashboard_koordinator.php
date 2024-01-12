@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["acc"])) {
           <tbody>
             <?php
             $no = 1;
-            $query = mysqli_query($koneksi, "SELECT id, judul, penulis, abstrak, pengesahan_name, ketersediaan_publikasi_name FROM tugas_akhir WHERE status = 'belum acc' ORDER BY id DESC");
+            $query = mysqli_query($koneksi, "SELECT id, judul, penulis, abstrak, pengesahan_name, ketersediaan_publikasi_name FROM tugas_akhir ORDER BY id DESC");
 
             if (!$query) {
               die("Query error: " . mysqli_error($koneksi));

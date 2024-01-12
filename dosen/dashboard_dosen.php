@@ -4,9 +4,9 @@ include '../config.php';
 
 // Cek apakah pengguna sudah login sebagai dosen
 if (!isset($_SESSION["id"]) || !isset($_SESSION["nama"]) || !isset($_SESSION["role"])) {
-    echo '<script>alert("Anda harus login sebagai dosen")</script>';
-    echo '<script>window.location.href = "../login.php";</script>';
-    exit();
+  echo '<script>alert("Anda harus login sebagai dosen")</script>';
+  echo '<script>window.location.href = "../login.php";</script>';
+  exit();
 }
 
 // Ambil data tugas akhir mahasiswa
@@ -28,14 +28,16 @@ $result_tugas_akhir2 = mysqli_query($koneksi, $sql_tugas_akhir2);
   <title>Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  
+
   <!-- Favicons -->
   <link href="../assets/img/logo-uns-biru.png" rel="icon">
   <link href="../assets/img/logo-uns-biru.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendoor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -94,77 +96,98 @@ $result_tugas_akhir2 = mysqli_query($koneksi, $sql_tugas_akhir2);
           <span>Log-out</span>
         </a>
       </li>
-      
+
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-        <div class="pagetitle" >
-            <h1>Dashboard</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="container" style='height: auto'>
-            <h2>Data Mahasiswa</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>JUDUL</th>
-                        <th>PENULIS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row_tugas_akhir = mysqli_fetch_assoc($result_tugas_akhir)) : ?>
-                        <tr>
-                            <td><?= $row_tugas_akhir["id"]; ?></td>
-                            <td><?= $row_tugas_akhir["judul"]; ?></td>
-                            <td><?= $row_tugas_akhir["penulis"]; ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-
-            <!-- Tabel Dokumen Tugas Akhir -->
-            <h2>Dokumen Tugas Akhir</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Bab 1</th>
-                        <th>Bab 2</th>
-                        <th>Bab 3</th>
-                        <th>Bab 4</th>
-                        <th>Bab 5</th>
-                        <th>Unduh</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row_tugas_akhir = mysqli_fetch_assoc($result_tugas_akhir2)) : ?>
-                        <tr>
-                            <td><?= $row_tugas_akhir["id"]; ?></td>
-                            <td><?= $row_tugas_akhir["penulis"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab_1_name"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab_2_name"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab_3_name"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab_4_name"]; ?></td>
-                            <td><?= $row_tugas_akhir["bab_5_name"]; ?></td>
-                            <td><a href='download.php?id=<?= $row_tugas_akhir["id"]; ?>'>Unduh</a></td>
-                        </tr>
-                    <?php endwhile; ?>
-            </tbody>
-        </table>
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
     </div>
-      
+    <div class="container" style='height: auto'>
+      <h2>Data Mahasiswa</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>JUDUL</th>
+            <th>PENULIS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($row_tugas_akhir = mysqli_fetch_assoc($result_tugas_akhir)): ?>
+            <tr>
+              <td>
+                <?= $row_tugas_akhir["id"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["judul"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["penulis"]; ?>
+              </td>
+            </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
 
-    
+      <!-- Tabel Dokumen Tugas Akhir -->
+      <h2>Dokumen Tugas Akhir</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Bab 1</th>
+            <th>Bab 2</th>
+            <th>Bab 3</th>
+            <th>Bab 4</th>
+            <th>Bab 5</th>
+            <th>Unduh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($row_tugas_akhir = mysqli_fetch_assoc($result_tugas_akhir2)): ?>
+            <tr>
+              <td>
+                <?= $row_tugas_akhir["id"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["penulis"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["bab_1_name"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["bab_2_name"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["bab_3_name"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["bab_4_name"]; ?>
+              </td>
+              <td>
+                <?= $row_tugas_akhir["bab_5_name"]; ?>
+              </td>
+              <td><a href='download.php?id=<?= $row_tugas_akhir["id"]; ?>'>Unduh</a></td>
+            </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+    </div>
+
+
+
   </main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendoor/apexcharts/apexcharts.min.js"></script>

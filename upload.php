@@ -210,6 +210,8 @@
                 $bab_4_path = "assets/file/bab_4/". $bab_4_name;
                 $bab_5_path = "assets/file/bab_5/". $bab_5_name;
 
+                echo $bab_1_path ;
+
 
                 $poster = $_FILES['poster_ta']['name'];
                 $poster_tmp = $_FILES['poster_ta']['tmp_name'];

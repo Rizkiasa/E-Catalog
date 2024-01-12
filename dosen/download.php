@@ -5,7 +5,7 @@ include '../config.php';
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
-    // Ambil nama file dari database berdasarkan ID
+    // Ambil data file dari database berdasarkan ID
     $sql = "SELECT penulis, path_bab_1, path_bab_2, path_bab_3, path_bab_4, path_bab_5 FROM tugas_akhir WHERE id = $id";
     $result = mysqli_query($koneksi, $sql);
 
@@ -21,19 +21,54 @@ if (isset($_GET["id"])) {
         // Membuka file dan mengirimkan kontennya ke output
         $zip = new ZipArchive();
         $zipFileName = tempnam(sys_get_temp_dir(), "tugas_akhir");
-        if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
-            $zip->addFile($row["path_bab_1"], '.doc,.docx,.pdf'); 
-            $zip->addFile($row["path_bab_2"], '.doc,.docx,.pdf'); 
-            $zip->addFile($row["path_bab_3"], '.doc,.docx,.pdf'); 
-            $zip->addFile($row["path_bab_4"], '.doc,.docx,.pdf'); 
-            $zip->addFile($row["path_bab_5"], '.doc,.docx,.pdf'); 
-            $zip->close();
 
-            // Debugging: Output content of variables
-            var_dump($row["path_bab_1"], $row["path_bab_2"], $row["path_bab_3"], $row["path_bab_4"], $row["path_bab_5"]);
+        if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
+            // Tambahkan file ke dalam ZIP
+            echo "File 1: ../" . $row["path_bab_1"];
+            if (file_exists("../" . $row["path_bab_1"])) {
+                echo "File exists";
+                $zip->addFile('../' . $row["path_bab_1"], 'path_bab_1.docx');
+            } else {
+                echo "File not found";
+            }
+
+            echo "File 2: ../" . $row["path_bab_2"];
+            if (file_exists("../" . $row["path_bab_2"])) {
+                echo "File exists";
+                $zip->addFile('../' . $row["path_bab_2"], 'path_bab_2.docx');
+            } else {
+                echo "File not found";
+            }
+
+            echo "File 3: ../" . $row["path_bab_3"];
+            if (file_exists("../" . $row["path_bab_3"])) {
+                echo "File exists";
+                $zip->addFile('../' . $row["path_bab_3"], 'path_bab_3.docx');
+            } else {
+                echo "File not found";
+            }
+
+            echo "File 4: ../" . $row["path_bab_4"];
+            if (file_exists("../" . $row["path_bab_4"])) {
+                echo "File exists";
+                $zip->addFile('../' . $row["path_bab_4"], 'path_bab_4.docx');
+            } else {
+                echo "File not found";
+            }
+
+            echo "File 5: ../" . $row["path_bab_5"];
+            if (file_exists("../" . $row["path_bab_5"])) {
+                echo "File exists";
+                $zip->addFile('../' . $row["path_bab_5"], 'path_bab_5.docx');
+            } else {
+                echo "File not found";
+            }
 
             // Mengirimkan file ZIP ke output
             readfile($zipFileName);
+
+            // Menutup file ZIP
+            $zip->close();
 
             // Menghapus file ZIP sementara setelah dikirim
             unlink($zipFileName);
